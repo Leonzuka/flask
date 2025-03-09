@@ -23,9 +23,12 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 database_url = os.environ.get('DATABASE_URL')
+if not database_url:
+    database_url = 'mysql+pymysql://root:CDgpcTOfpvsefoWvuqPyZmrwnBjdfqjz@mysql.railway.internal:3306/railway'
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 
-# Use variável de ambiente para configuração do banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'mysql://root:CDgpcTOfpvsefoWvuqPyZmrwnBjdfqjz@mysql.railway.internal:3306/railway'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 # Ajuste para funcionamento em produção
 if __name__ == '__main__':
