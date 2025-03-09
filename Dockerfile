@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
 # Copiar arquivos do projeto
 COPY . /app/
 
+RUN pip install --upgrade pip
 # Instalar dependências Python
 RUN pip install --no-cache-dir -r requirements.txt
 
